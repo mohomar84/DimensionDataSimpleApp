@@ -1,0 +1,5 @@
+( 2019.05.20 12:17:00 PM ) : Encryption done for  encrypted Property  :database.user.name
+( 2019.05.20 12:17:00 PM ) : Encryption done for  encrypted Property  :database.user.password
+( 2019.05.20 12:17:00 PM ) : Encryption done for  encrypted Property  :database.server.host
+( 2019.05.20 12:17:00 PM ) : Encryption done for  encrypted Property  :database.server.port
+( 2019.05.20 12:17:00 PM ) : Encryption done for  encrypted Property  :database.server.sid
