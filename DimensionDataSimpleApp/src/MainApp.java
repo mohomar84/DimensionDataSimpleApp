@@ -18,8 +18,6 @@ public class MainApp
 		System.out.println("help ,quit ,countServers ,addServer ,deleteServer ,editServer ,listServers");
 		String option = scanner.next();
 
-		// System.out.println(" you add "+ option);
-
 		sqlUtils dbfunctions = new sqlUtils();
 
 		while (running) {
