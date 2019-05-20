@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import model.Server;
+import util.ConstantsUtil;
+import util.MsgLog;
 
 public class sqlUtils {
 
@@ -30,7 +32,7 @@ public class sqlUtils {
 
 		} catch (SQLException e) {
 			
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage()); MsgLog.write(e.getMessage()); MsgLog.write(e.getMessage());
 		} finally {
 			closeConnaction();
 		}
@@ -52,7 +54,7 @@ public class sqlUtils {
 			preparedStmt.execute();
 
 		} catch (SQLException e) {
-
+			MsgLog.write(e.getMessage());
 			System.out.println(e.getMessage());
 		} finally {
 			closeConnaction();
@@ -77,7 +79,8 @@ public class sqlUtils {
 				count = Integer.parseInt(rs.getString(1));
 			}
 		} catch (SQLException e) {
-			e.getStackTrace();
+			MsgLog.write(e.getMessage());
+			System.out.println(e.getMessage());
 		} finally {
 			closeConnaction();
 		}
@@ -102,13 +105,15 @@ public class sqlUtils {
 				System.out.println("");
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			MsgLog.write(e.getMessage());
+			System.out.println(e.getMessage()); 
+
 		} finally {
 			try {
 				st.close();
 				closeConnaction();
 			} catch (SQLException e) {
-				
+				MsgLog.write(e.getMessage());
 				System.out.println(e.getMessage());
 			}
 
@@ -129,14 +134,14 @@ public class sqlUtils {
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage()); MsgLog.write(e.getMessage()); MsgLog.write(e.getMessage());
 		} finally {
 			try {
 
 				closeConnaction();
 			} catch (Exception e) {
-				
-				System.out.println(e.getMessage());
+				MsgLog.write(e.getMessage());
+				System.out.println(e.getMessage()); MsgLog.write(e.getMessage()); MsgLog.write(e.getMessage());
 			}
 		}
 		System.out.println("Server is Updated ");
@@ -144,18 +149,24 @@ public class sqlUtils {
 	}
 
 	private Connection getconnaction() {
+		
+		// db parameters
+		String[] dbConfigration = util.ReadConfigration.getDBconfigration();
+		
+		String url = ConstantsUtil.DB_URL + dbConfigration[2] + ":" + dbConfigration[3] + "/" + dbConfigration[4];
+        String user = dbConfigration[0];
+        String password = dbConfigration[1];
+        
+       
 
 		try {
-			// db parameters
-			String url = "jdbc:mysql://dimensiondb.c6ep2ccvi7dh.eu-west-1.rds.amazonaws.com:3306/Dimension";
-			String user = "Dimension";
-			String password = "Dimension1234";
+			
 
 			// create a connection to the database
 			conn = DriverManager.getConnection(url, user, password);
 
 		} catch (SQLException e) {
-			
+			MsgLog.write(e.getMessage());
 			System.out.println(e.getMessage());
 		}
 		return conn;
@@ -168,6 +179,7 @@ public class sqlUtils {
 			if (preparedStmt != null)
 				preparedStmt.close();
 		} catch (SQLException ex) {
+			MsgLog.write(ex.getMessage());
 			System.out.println(ex.getMessage());
 			
 		}
